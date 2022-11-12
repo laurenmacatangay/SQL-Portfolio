@@ -1,0 +1,21 @@
+/** This SQL code is creating a data table, and inserting values into it. I chose to create a table listing 3 movies made by Studio Ghibli and
+how I would rate them on a scale from 1 to 10. Movie names used: "Spirited Away", "Howl's Moving Castle", and "Ponyo". **/
+
+/** This line creates the table GhibliMovies and identifies the name and type of each column I want in my dataset **/
+CREATE TABLE GhibliMovies (id INTEGER PRIMARY KEY, name TEXT, rating INTEGER);
+
+/** Here I am inserting the values for the rows in my dataset. You can see that the order of information I am inserting corresponds to the order of
+the columns that I established in the previous line of code **/
+INSERT INTO GhibliMovies VALUES (1, "Spirited Away", 9);
+INSERT INTO GhibliMovies VALUES (2, "Howl's Moving Castle", 10);
+INSERT INTO GhibliMovies VALUES (3, "Ponyo", 7);
+
+/** To view the values I inserted, I can use the SELECT command. The asterisk means that I will be pulling all of the values from the dataset. I use
+the ORDER BY command in conjuction with this which will order the data in ascending rating order. **/
+SELECT * FROM GhibliMovies
+ORDER BY rating;
+
+/** The ORDER BY command will sort the data in ascending order by default. Below I use the DESC command to sort the returned data in descending
+rating order. **/
+SELECT * FROM GhibliMovies
+ORDER BY rating DESC;
