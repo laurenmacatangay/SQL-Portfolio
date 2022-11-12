@@ -1,4 +1,4 @@
-/** This SQL code is creating a data table, inserting values into it, and pulling the data from that set. I chose to create a table listing 3 movies 
+/** This SQL code is creating a data table, inserting values into it, and pulling the data from that table. I chose to create a table listing 3 movies 
 made by Studio Ghibli and how I would rate them on a scale from 1 to 10. 
 Movie names used: "Spirited Away", "Howl's Moving Castle", and "Ponyo". **/
 
