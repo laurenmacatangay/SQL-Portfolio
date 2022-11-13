@@ -1,0 +1,40 @@
+/** This SQL code is showing how I created a data table, inserted values into the table, and specified what data I wanted to pull from it. **/
+
+/** CREATING THE DATA TABLE **/
+/** Here I created a table called CameraStore which contains information on the products sold in a camera store. 
+I first specified my column names and what type of data would be input into those columns. **/
+CREATE TABLE CameraStore (id INTEGER PRIMARY KEY, producttype TEXT, brand TEXT, price NUMERIC, quantity INTEGER, serialnumber TEXT);
+
+/** After establishing the structure of the data table, I then inserted the individual rows containing the information on each product. **/ 
+INSERT INTO CameraStore VALUES (1, "Camera", "Sony", 2599.95, 10, "CSSC1");
+INSERT INTO CameraStore VALUES (2, "Camera", "Sony", 3599.95, 15, "CSSC2");
+INSERT INTO CameraStore VALUES (3, "Camera", "Sony", 1000.95, 15, "CSSC3");
+INSERT INTO CameraStore VALUES (4, "Camera Battery", "Sony", 100.95, 20, "CSSB1");
+INSERT INTO CameraStore VALUES (5, "Camera Battery", "Sony", 110.95, 25, "CSSB2");
+INSERT INTO CameraStore VALUES (6, "Camera Battery", "Sony", 170.95, 20, "CSSB3");
+INSERT INTO CameraStore VALUES (7, "Tripod", "Canon", 89.59, 5, "CSCT1");
+INSERT INTO CameraStore VALUES (8, "Camera", "Canon", 700.55, 5, "CSCC1");
+INSERT INTO CameraStore VALUES (9, "Camera", "Canon", 800.55, 5, "CSCC2");
+INSERT INTO CameraStore VALUES (10, "Camera", "Canon", 900.55, 9, "CSCC3");
+INSERT INTO CameraStore VALUES (11, "Neck Strap", "Canon", 15.79, 9, "CSCN1");
+INSERT INTO CameraStore VALUES (12, "Neck Strap", "Sony", 29.85, 9, "CSSN1");
+INSERT INTO CameraStore VALUES (13, "Monitor", "Sony", 100.55, 1, "CSSM1");
+INSERT INTO CameraStore VALUES (14, "Monitor", "Sony", 205.55, 2, "CSSM2");
+INSERT INTO CameraStore VALUES (15, "Monitor", "Canon", 55.55, 7, "CSCM1");
+
+
+/** SELECTING DATA FROM THE DATA TABLE **/
+/** This line pulls all of the data from the table and arranges it by price in descending order. This would be useful to the shop owner if they
+wanted to see what inventory is costing them the most to keep in stock. **/
+SELECT * 
+  FROM CameraStore 
+  ORDER BY price DESC;
+
+/** If a customer came into the store with a strict budget for a new full set of equipment and only wanted to see the least expensive products, then
+I can use the code below. This code groups the rows together based on their product type and finds what the lowest price of each group is. 
+I also specify that I only want to show the columns indicating the product's type, price, and serial number and that I want the values ordered 
+by price in ascending order since the customer's main concern is cost and not the brands of the products. **/
+SELECT producttype, MIN(price) AS LowestPrice, serialnumber 
+    FROM CameraStore 
+    GROUP BY producttype 
+    ORDER BY LowestPrice;
