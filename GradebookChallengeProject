@@ -1,0 +1,65 @@
+/** The table student_grades was created by a Khan Academy author. The work following the table creation is my own. **/
+
+CREATE TABLE student_grades (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    number_grade INTEGER,
+    fraction_completed REAL);
+    
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winston", 90, 0.805);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winnefer", 95, 0.901);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winsteen", 85, 0.906);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Wincifer", 66, 0.7054);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winster", 76, 0.5013);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winstonia", 82, 0.9045);
+
+/** The following is my own work **/
+
+/** This gives me the column fraction_completed as a percentage instead. **/
+SELECT name, number_grade, ROUND(100*fraction_completed) AS percent_completed
+    FROM student_grades;
+
+/** This pulls the existing columns name and number_grade, and creates two new columns letter_grade and pass_or_fail based on conditions 
+I have set. Ex: Since Wincifer received a number_grade which was less than a 70, he currently has an F letter grade and is not passing. **/
+SELECT name, number_grade,
+    CASE
+        WHEN number_grade > 90 THEN "A"
+        WHEN number_grade > 80 THEN "B"
+        WHEN number_grade > 70 THEN "C"
+        ELSE "F"
+    END as "letter_grade",
+    CASE 
+        WHEN number_grade > 70 THEN "pass"
+        ELSE "fail"
+    END as "pass_or_fail"
+    FROM student_grades;
+
+/** This creates two columns. The CASE statement is used to establish what letter each number grade would be considered as. This gets put 
+into the new column letter_grade. The GROUP BY statement groups the rows together that have the same value in the letter_grade column and 
+the COUNT statement tells us how many rows are in each group. **/
+SELECT COUNT(*),
+    CASE
+        WHEN number_grade > 90 THEN "A"
+        WHEN number_grade > 80 THEN "B"
+        WHEN number_grade > 70 THEN "C"
+        ELSE "F"
+    END as "letter_grade"
+    FROM student_grades
+    GROUP BY letter_grade;
+    
+/** If I don't care about letter grade and only want to see how many students are passing or failing, I can use the code below. This 
+creates the column pass_or_fail based on a set condition. The GROUP BY statement groups the rows together that have the same value in the 
+pass_or_fail column and the COUNT statement tells us how many rows are in each group. **/
+SELECT COUNT (*),
+    CASE 
+        WHEN number_grade > 70 THEN "pass"
+        ELSE "fail"
+    END as "pass_or_fail"
+    FROM student_grades
+    GROUP BY "pass_or_fail";
